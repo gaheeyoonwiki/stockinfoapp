@@ -9,8 +9,6 @@ import matplotlib
 from matplotlib import rc
 from io import BytesIO
 
-import matplotlib.font_manager as fm
-
 #----------------------------------------
 # 한국 주식 종목 코드를 가져오는 함수
 #----------------------------------------
@@ -51,10 +49,6 @@ def get_ticker_symbol(company_name, maket_type):
     return ticker_symbol
 #---------------------------------------------------------
 
-# 설치된 폰트 출력
-font_list = fm.findSystemFonts(fontpaths=None, fontext='ttf')
-st.write(font_list)
-
 st.title("주식 정보를 가져오는 웹 앱")
 
 # 사이드바의 폭을 조절. {width:250px;}로 지정하면 폭을 250픽셀로 지정
@@ -92,18 +86,20 @@ if(clicked == True):
     
     # 2) 차트 그리기
     # matplotlib을 이용한 그래프에 한글을 표시하기 위한 설정
-    # rc('font', family='AppleGothic') 			        
-    # matplotlib.rcParams['font.family'] = 'Malgun Gothic'
-    plt.rcParams["font.family"] = "UnBatang"
+    # rc('font', family='AppleGothic') 			                # macOS
+    # matplotlib.rcParams['font.family'] = 'Malgun Gothic'      # 윈도우
+    path = '/usr/share/fonts/truetype/unfonts-core/UnDotum.ttf'
+    fontprop = fm.FontProperties(fname=path, size=15)
+            
     matplotlib.rcParams['axes.unicode_minus'] = False
     
     # 선 그래프 그리기
     ax = df['Close'].plot(grid=True, figsize=(15, 5))
-    ax.set_title("주가(종가) 그래프", fontsize=30) # 그래프 제목을 지정
-    ax.set_xlabel("기간", fontsize=20)             # x축 라벨을 지정
-    ax.set_ylabel("주가(원)", fontsize=20)         # y축 라벨을 지정
-    plt.xticks(fontsize=15)                        # X축 눈금값의 폰트 크기 지정
-    plt.yticks(fontsize=15)                        # Y축 눈금값의 폰트 크기 지정    
+    ax.set_title("주가(종가) 그래프", fontsize=30, fontproperties=fontprop) # 그래프 제목을 지정
+    ax.set_xlabel("기간", fontsize=20, fontproperties=fontprop)             # x축 라벨을 지정
+    ax.set_ylabel("주가(원)", fontsize=20, fontproperties=fontprop)         # y축 라벨을 지정
+    plt.xticks(fontsize=15, fontproperties=fontprop)                        # X축 눈금값의 폰트 크기 지정
+    plt.yticks(fontsize=15, fontproperties=fontprop)                        # Y축 눈금값의 폰트 크기 지정    
     fig = ax.get_figure()                          # fig 객체 가져오기    
     st.pyplot(fig)                                 # 스트림릿 웹 앱에 그래프 그리기
     
