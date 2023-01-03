@@ -86,8 +86,9 @@ if(clicked == True):
     
     # 2) 차트 그리기
     # matplotlib을 이용한 그래프에 한글을 표시하기 위한 설정
-    rc('font', family='AppleGothic') 			        
+    # rc('font', family='AppleGothic') 			        
     # matplotlib.rcParams['font.family'] = 'Malgun Gothic'
+    plt.rcParams['font.family'] = 'NanumGothic'
     matplotlib.rcParams['axes.unicode_minus'] = False
     
     # 선 그래프 그리기
