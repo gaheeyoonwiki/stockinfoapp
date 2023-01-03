@@ -90,18 +90,17 @@ if(clicked == True):
     # rc('font', family='AppleGothic') 			                # macOS
     # matplotlib.rcParams['font.family'] = 'Malgun Gothic'      # 윈도우
     path = '/usr/share/fonts/truetype/unfonts-core/UnDotum.ttf'
-    font_name = fm.FontProperties(fname=path).get_name()
-    plt.rc('font', family=font_name)
-   
+    fontprop = fm.FontProperties(fname=path)
+    
     matplotlib.rcParams['axes.unicode_minus'] = False
     
     # 선 그래프 그리기
     ax = df['Close'].plot(grid=True, figsize=(15, 5))
-    ax.set_title("주가(종가) 그래프", fontsize=30) # 그래프 제목을 지정
-    ax.set_xlabel("기간", fontsize=20)             # x축 라벨을 지정
-    ax.set_ylabel("주가(원)", fontsize=20)         # y축 라벨을 지정
-    plt.xticks(fontsize=15)                        # X축 눈금값의 폰트 크기 지정
-    plt.yticks(fontsize=15)                        # Y축 눈금값의 폰트 크기 지정    
+    ax.set_title("주가(종가) 그래프", fontsize=30, fontproperties=fontprop) # 그래프 제목을 지정
+    ax.set_xlabel("기간", fontsize=20, fontproperties=fontprop)             # x축 라벨을 지정
+    ax.set_ylabel("주가(원)", fontsize=20, fontproperties=fontprop)         # y축 라벨을 지정
+    plt.xticks(fontsize=15, fontproperties=fontprop)                        # X축 눈금값의 폰트 크기 지정
+    plt.yticks(fontsize=15, fontproperties=fontprop)                        # Y축 눈금값의 폰트 크기 지정    
     fig = ax.get_figure()                          # fig 객체 가져오기    
     st.pyplot(fig)                                 # 스트림릿 웹 앱에 그래프 그리기
     
