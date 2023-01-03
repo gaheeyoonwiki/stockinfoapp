@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 from matplotlib import rc
 from io import BytesIO
+import matplotlib.font_manager as fm
 
 #----------------------------------------
 # 한국 주식 종목 코드를 가져오는 함수
