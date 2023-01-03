@@ -90,7 +90,7 @@ if(clicked == True):
     # rc('font', family='AppleGothic') 			                # macOS
     # matplotlib.rcParams['font.family'] = 'Malgun Gothic'      # 윈도우
     path = '/usr/share/fonts/truetype/unfonts-core/UnDotum.ttf'
-    fontprop = fm.FontProperties(fname=path)
+    fontprop = fm.FontProperties(fname=path).get_name()
     plt.rc('font', family=font_name)
    
     matplotlib.rcParams['axes.unicode_minus'] = False
