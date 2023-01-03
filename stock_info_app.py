@@ -9,6 +9,8 @@ import matplotlib
 from matplotlib import rc
 from io import BytesIO
 
+import matplotlib.font_manager as fm
+
 #----------------------------------------
 # 한국 주식 종목 코드를 가져오는 함수
 #----------------------------------------
@@ -48,6 +50,10 @@ def get_ticker_symbol(company_name, maket_type):
     
     return ticker_symbol
 #---------------------------------------------------------
+
+# 설치된 폰트 출력
+font_list = fm.findSystemFonts(fontpaths=None, fontext='ttf')
+st.write(font_list)
 
 st.title("주식 정보를 가져오는 웹 앱")
 
