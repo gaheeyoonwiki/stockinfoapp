@@ -10,6 +10,7 @@ from matplotlib import rc
 from io import BytesIO
 import matplotlib.font_manager as fm
 
+fm._load_fontmanager(try_read_cache=False)
 
 #----------------------------------------
 # 한국 주식 종목 코드를 가져오는 함수
