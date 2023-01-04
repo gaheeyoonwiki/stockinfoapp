@@ -10,13 +10,6 @@ from matplotlib import rc
 from io import BytesIO
 import matplotlib.font_manager as fm
 
-fm._load_fontmanager(try_read_cache=False)
-
-# 디렉토리 및 파일 이름에 맞추어 변경
-font_location = './NanumGothic.ttf'
-font_name = fm.FontProperties(fname=font_location).get_name()
-rc('font', family=font_name)
-
 
 #----------------------------------------
 # 한국 주식 종목 코드를 가져오는 함수
