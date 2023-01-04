@@ -90,7 +90,6 @@ if(clicked == True):
     # rc('font', family='AppleGothic') 			                # macOS
     # matplotlib.rcParams['font.family'] = 'Malgun Gothic'      # 윈도우
     
-    font_path = 'NanumGothic.ttf'
     fontprop = fm.FontProperties(fname=font_path, size=18)
     matplotlib.rcParams['font.family'] = 'NanumGothic'
     
