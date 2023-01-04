@@ -52,9 +52,6 @@ def get_ticker_symbol(company_name, maket_type):
 
 st.title("주식 정보를 가져오는 웹 앱")
 
-font_list = fm.findSystemFonts(fontpaths=None, fontext='ttf')
-st.write(font_list)
-
 # 사이드바의 폭을 조절. {width:250px;}로 지정하면 폭을 250픽셀로 지정
 st.markdown(
     """
@@ -93,9 +90,10 @@ if(clicked == True):
     # rc('font', family='AppleGothic') 			                # macOS
     # matplotlib.rcParams['font.family'] = 'Malgun Gothic'      # 윈도우
 
-    font_path = 'NanumGothic.ttf'
-    fontprop = fm.FontProperties(fname=font_path, size=18)
-    matplotlib.rcParams['font.family'] = 'NanumGothic'
+    font_fname = '/usr/share/fonts/truetype/nanum/NanumGothic.ttf'
+    font_name = font_manager.FontProperties(fname=font_fname).get_name()
+    rc('font', family=font_name)
+
     matplotlib.rcParams['axes.unicode_minus'] = False
     
     # 선 그래프 그리기
