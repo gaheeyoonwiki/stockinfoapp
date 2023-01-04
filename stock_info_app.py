@@ -91,7 +91,7 @@ if(clicked == True):
     # matplotlib.rcParams['font.family'] = 'Malgun Gothic'      # 윈도우
 
     font_fname = '/usr/share/fonts/truetype/nanum/NanumGothic.ttf'
-    font_name = font_manager.FontProperties(fname=font_fname).get_name()
+    font_name = fm.FontProperties(fname=font_fname).get_name()
     rc('font', family=font_name)
 
     matplotlib.rcParams['axes.unicode_minus'] = False
