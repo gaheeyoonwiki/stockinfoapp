@@ -89,8 +89,10 @@ if(clicked == True):
     # matplotlib을 이용한 그래프에 한글을 표시하기 위한 설정
     # rc('font', family='AppleGothic') 			                # macOS
     # matplotlib.rcParams['font.family'] = 'Malgun Gothic'      # 윈도우
-    path = '/usr/share/fonts/truetype/unfonts-core/UnDotum.ttf'
-    fontprop = fm.FontProperties(fname=path)
+    
+    font_path = 'NanumGothic.ttf'
+    fontprop = fm.FontProperties(fname=font_path, size=18)
+    matplotlib.rcParams['font.family'] = 'NanumGothic'
     
     matplotlib.rcParams['axes.unicode_minus'] = False
     
