@@ -89,11 +89,14 @@ if(clicked == True):
     # matplotlib을 이용한 그래프에 한글을 표시하기 위한 설정
     # rc('font', family='AppleGothic') 			                # macOS
     # matplotlib.rcParams['font.family'] = 'Malgun Gothic'      # 윈도우
+    
+    font_path = 'NanumGothic.ttf'
+    fontprop = fm.FontProperties(fname='NanumGothic.ttf', size=18)
     matplotlib.rcParams['axes.unicode_minus'] = False
     
     # 선 그래프 그리기
     ax = df['Close'].plot(grid=True, figsize=(15, 5))
-    ax.set_title("주가(종가) 그래프", fontsize=30) # 그래프 제목을 지정
+    ax.set_title("주가(종가) 그래프", fontsize=30)     # 그래프 제목을 지정
     ax.set_xlabel("기간", fontsize=20)             # x축 라벨을 지정
     ax.set_ylabel("주가(원)", fontsize=20)         # y축 라벨을 지정
     plt.xticks(fontsize=15)                        # X축 눈금값의 폰트 크기 지정
