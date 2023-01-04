@@ -10,8 +10,7 @@ from matplotlib import rc
 from io import BytesIO
 import matplotlib.font_manager as fm
 
-fm._rebuild()
-fm.get_fontconfig_fonts()
+fm._load_fontmanager(try_read_cache=False)
 
 # 디렉토리 및 파일 이름에 맞추어 변경
 font_location = './NanumGothic.ttf'
