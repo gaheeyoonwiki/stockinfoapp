@@ -10,6 +10,9 @@ from matplotlib import rc
 from io import BytesIO
 import matplotlib.font_manager as fm
 
+fontprop = fm.FontProperties(fname='NanumGothic.ttf', size=18)
+matplotlib.rcParams['axes.unicode_minus'] = False    
+
 #----------------------------------------
 # 한국 주식 종목 코드를 가져오는 함수
 #----------------------------------------
@@ -90,8 +93,6 @@ if(clicked == True):
     # rc('font', family='AppleGothic') 			                # macOS
     # matplotlib.rcParams['font.family'] = 'Malgun Gothic'      # 윈도우
 
-    fontprop = fm.FontProperties(fname='NanumGothic.ttf', size=18)
-    matplotlib.rcParams['axes.unicode_minus'] = False    
     
     # 선 그래프 그리기
     ax = df['Close'].plot(grid=True, figsize=(15, 5))
