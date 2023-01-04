@@ -52,7 +52,7 @@ def get_ticker_symbol(company_name, maket_type):
 
 st.title("주식 정보를 가져오는 웹 앱")
 
-font_list = font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
+font_list = fm.findSystemFonts(fontpaths=None, fontext='ttf')
 st.write(font_list)
 
 # 사이드바의 폭을 조절. {width:250px;}로 지정하면 폭을 250픽셀로 지정
