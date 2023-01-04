@@ -6,31 +6,22 @@ import yfinance as yf
 import datetime
 import matplotlib.pyplot as plt
 import matplotlib
+from matplotlib import rc
 from io import BytesIO
-
-
-import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
-
-
-fontprop = fm.FontProperties(fname='NanumGothic.ttf', size=18)
-matplotlib.rcParams['axes.unicode_minus'] = False
-# matplotlib.rcParams['font.family'] = 'NanumGothic'
-
-    
 #----------------------------------------
 # 한국 주식 종목 코드를 가져오는 함수
 #----------------------------------------
-def get_stock_info(market_type=None):
+def get_stock_info(maket_type=None):
     # 한국거래소(KRX)에서 전체 상장법인 목록 가져오기
     base_url =  "http://kind.krx.co.kr/corpgeneral/corpList.do"
     method = "download"
-    if market_type == 'kospi':
+    if maket_type == 'kospi':
         marketType = "stockMkt"  # 주식 종목이 코스피인 경우
-    elif market_type == 'kosdaq':
+    elif maket_type == 'kosdaq':
         marketType = "kosdaqMkt" # 주식 종목이 코스닥인 경우
-    elif market_type == None:
+    elif maket_type == None:
         marketType = ""
     url = "{0}?method={1}&marketType={2}".format(base_url, method, marketType)
 
@@ -46,20 +37,23 @@ def get_stock_info(market_type=None):
 #----------------------------------------------------
 # yfinance에 이용할 Ticker 심볼을 반환하는 함수
 #----------------------------------------------------
-def get_ticker_symbol(company_name, market_type):
-    df = get_stock_info(market_type)
+def get_ticker_symbol(company_name, maket_type):
+    df = get_stock_info(maket_type)
     code = df[df['회사명']==company_name]['종목코드'].values
     code = code[0]
     
-    if market_type == 'kospi':
+    if maket_type == 'kospi':
         ticker_symbol = code +".KS" # 코스피 주식의 심볼
-    elif market_type == 'kosdaq':
+    elif maket_type == 'kosdaq':
         ticker_symbol = code +".KQ" # 코스닥 주식의 심볼
     
     return ticker_symbol
 #---------------------------------------------------------
 
-st.title("주식 정보를 가져오는 웹 앱1")
+st.title("주식 정보를 가져오는 웹 앱")
+
+font_list = font_manager.findSystemFonts(fontpaths=None, fontext='ttf')
+st.write(font_list)
 
 # 사이드바의 폭을 조절. {width:250px;}로 지정하면 폭을 250픽셀로 지정
 st.markdown(
@@ -96,18 +90,19 @@ if(clicked == True):
     
     # 2) 차트 그리기
     # matplotlib을 이용한 그래프에 한글을 표시하기 위한 설정
-    # matplotlib.rcParams['font.family'] = 'Malgun Gothic'
-    # matplotlib.rcParams['axes.unicode_minus'] = False
-    
+    fontprop = fm.FontProperties(fname='NanumGothic.ttf', size=18)
+    matplotlib.rcParams['axes.unicode_minus'] = False
+
     # 선 그래프 그리기
     ax = df['Close'].plot(grid=True, figsize=(15, 5))
-    ax.set_title("주가(종가) 그래프", fontsize=30) # 그래프 제목을 지정
+    ax.set_title("주가(종가) 그래프", fontsize=30)     # 그래프 제목을 지정
     ax.set_xlabel("기간", fontsize=20)             # x축 라벨을 지정
     ax.set_ylabel("주가(원)", fontsize=20)         # y축 라벨을 지정
     plt.xticks(fontsize=15)                        # X축 눈금값의 폰트 크기 지정
-    plt.yticks(fontsize=15)                        # Y축 눈금값의 폰트 크기 지정
-    fig = ax.get_figure()                          # fig 객체 가져오기
+    plt.yticks(fontsize=15)                        # Y축 눈금값의 폰트 크기 지정    
+    fig = ax.get_figure()                          # fig 객체 가져오기    
     st.pyplot(fig)                                 # 스트림릿 웹 앱에 그래프 그리기
+    
     
     # 3) 파일 다운로드
     st.markdown("**주가 데이터 파일 다운로드**")
@@ -116,6 +111,10 @@ if(clicked == True):
 
     # DataFrame 데이터를 엑셀 데이터(excel_data)로 변환
     excel_data = BytesIO()  # 메모리 버퍼에 바이너리 객체 생성
+    
+    df.reset_index(inplace=True)
+    df['Date'] = pd.to_datetime(df['Date']).dt.date
+    df.set_index('Date', inplace=True)
     df.to_excel(excel_data) # DataFrame 데이터를 엑셀 형식으로 버퍼에 쓰기
 
     columns = st.columns(2) # 2개의 세로단으로 구성
@@ -123,3 +122,4 @@ if(clicked == True):
         st.download_button("CSV 파일 다운로드", csv_data, file_name='stock_data.csv')
     with columns[1]:
         st.download_button("엑셀 파일 다운로드", excel_data, file_name='stock_data.xlsx')
+   
