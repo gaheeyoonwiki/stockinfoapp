@@ -90,8 +90,8 @@ if(clicked == True):
     # rc('font', family='AppleGothic') 			                # macOS
     # matplotlib.rcParams['font.family'] = 'Malgun Gothic'      # 윈도우
     
-    font_path = 'NanumGothic.ttf'
-    fontprop = fm.FontProperties(fname='NanumGothic.ttf', size=18)
+    plt.rcParams["font.family"] = 'NanumGothic'
+    plt.rcParams['font.size'] = 12
     matplotlib.rcParams['axes.unicode_minus'] = False
     
     # 선 그래프 그리기
